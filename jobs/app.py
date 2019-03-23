@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template,g
 
 PATH= 'db/jobs.sqlite'
 
@@ -8,7 +8,7 @@ def open_connection():
 	if connection == None:
 		connection = g._connection = sqlite3.connect(PATH)
 	connection.row_factory = sqlite3.Row
-	return connection
+	retrun connection
 
 def execute_sql(sql,values=(),commit=False,single=False):
 	connection = open_connection()
@@ -20,7 +20,7 @@ def execute_sql(sql,values=(),commit=False,single=False):
 	cursor.close()
 	return results
 
-def close_connection(exception):
+def close_connection
 	connection = getattr(g,'_connection',None)
 	if connection is not None:
 		connection.close()
